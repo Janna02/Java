@@ -2,8 +2,10 @@
 
 import java.util.Scanner;
 
+
 public class Calc {
-    public static void main (String [] args) {
+
+    static void Calculator() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите первое дробное число:");//пример 1.23
         double a = scanner.nextDouble();
@@ -23,7 +25,7 @@ public class Calc {
                 result = a * b;
                 break;
             case "/":
-                result = a /b;
+                result = a / b;
                 break;
             default:
                 System.out.println("Вы ввели некорректную операцию");
@@ -31,7 +33,66 @@ public class Calc {
         /*
          Вывод результата.
          */
-        System.out.printf("Результат равен="+"%.4f", result);
+        System.out.printf("Результат равен=" + "%.4f", result);
     }
+
+
+
+    static void Slovo() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите размерность массива:");
+        Integer a = scanner.nextInt();
+        String[] thisIsAStringArray = new String[a];
+        for (int i = 0; i < a; i++) {
+            System.out.println("Введите слово:");
+            String b = scanner.next();
+            thisIsAStringArray[i] = b;
+        }
+        for (int i = 0; i < a; i++) {
+            System.out.println(thisIsAStringArray[i]);
+
+        }
+        int bestElementIndex = 0;
+        for (int i = 1; i < thisIsAStringArray.length; i++) {
+            if (thisIsAStringArray[i].length() > thisIsAStringArray[bestElementIndex].length()) {
+                bestElementIndex = i;
+            }
+        }
+
+        System.out.println("Самое длинное слово" + "  " + thisIsAStringArray[bestElementIndex]);
     }
+
+    static void Choice() {
+        System.out.println("Выбрать: Калькулятор-1, Поиск максимального значения-2:");
+        Scanner scanner = new Scanner(System.in);
+        Integer y = scanner.nextInt();
+        switch (y) {
+            case 1: Calculator();
+            break;
+            case 2: Slovo();
+            break;
+            default: System.out.println("Такой операции нет");
+            break;
+
+
+        }
+
+
+    }
+    public static void main (String [] args) {
+Choice();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
