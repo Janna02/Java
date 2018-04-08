@@ -1,98 +1,86 @@
-/* @author Zhanna */
-
 import java.util.Scanner;
-
-
 public class Calc {
+    public static void main(String[] args) {
 
-    static void Calculator() {
+        System.out.println("Выберите операцию: Сложение <+>, Вычитание <->, Умножение <*>, Деление  </> ");
+
+
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите первое дробное число:");//пример 1.23
-        double a = scanner.nextDouble();
-        System.out.println("Введите второе дробное число:");//пример 1.23
-        double b = scanner.nextDouble();
-        System.out.println("Выберите операцию: +, -, *, /");
-        String oper = scanner.next();
-        double result = 0.0; /*значение результата по умолчанию*/
-        switch (oper) {
-            case "+":
-                result = a + b;
-                break;
-            case "-":
-                result = a - b;
-                break;
-            case "*":
-                result = a * b;
-                break;
-            case "/":
-                result = a / b;
-                break;
-            default:
-                System.out.println("Вы ввели некорректную операцию");
-        }
-        /*
-         Вывод результата.
-         */
-        System.out.printf("Результат равен=" + "%.4f", result);
-    }
+        boolean is_next_operation = false;
 
 
+        do {
+            System.out.print("Выберите операцию: ");
+            String operation = scanner.next();
 
-    static void Slovo() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите размерность массива:");
-        Integer a = scanner.nextInt();
-        String[] thisIsAStringArray = new String[a];
-        for (int i = 0; i < a; i++) {
-            System.out.println("Введите слово:");
-            String b = scanner.next();
-            thisIsAStringArray[i] = b;
-        }
-        for (int i = 0; i < a; i++) {
-            System.out.println(thisIsAStringArray[i]);
-
-        }
-        int bestElementIndex = 0;
-        for (int i = 1; i < thisIsAStringArray.length; i++) {
-            if (thisIsAStringArray[i].length() > thisIsAStringArray[bestElementIndex].length()) {
-                bestElementIndex = i;
+            switch (operation) {
+                case "+":
+                    addition(scanner);
+                    break;
+                case "-":
+                    subtraction(scanner);
+                    break;
+                case "*":
+                    multiplication(scanner);
+                    break;
+                case "/":
+                    division(scanner);
+                    break;
+                default:
+                    System.out.println("Операция неизвестна, выберите операцию из предложенных выше");
+                    break;
             }
-        }
 
-        System.out.println("Самое длинное слово" + "  " + thisIsAStringArray[bestElementIndex]);
+            System.out.println("\nПродолжить? (Y/N) ");
+            String is_next_operation_str = scanner.next();
+
+            is_next_operation = (is_next_operation_str.equals("y"));
+        } while (is_next_operation);
+          scanner.close();
     }
 
-    static void Choice() {
-        System.out.println("Выбрать: Калькулятор-1, Поиск максимального значения-2:");
-        Scanner scanner = new Scanner(System.in);
-        Integer y = scanner.nextInt();
-        switch (y) {
-            case 1: Calculator();
-            break;
-            case 2: Slovo();
-            break;
-            default: System.out.println("Такой операции нет");
-            break;
 
-
-        }
-
-
+    private static float[] scanner2Float(Scanner scanner) {
+        float[] numbers = new float[2];
+        System.out.println("Введите первое число: ");
+        numbers[0] = scanner.nextFloat();
+        System.out.println("Введите второе число: ");
+        numbers[1] = scanner.nextFloat();
+        return numbers;
     }
-    public static void main (String [] args) {
-Choice();
+
+    private static void addition(Scanner scanner) {
+        System.out.println("Выбрана операция сложение.");
+        float[] ab = scanner2Float(scanner);
+
+        System.out.printf("Результат: %.4f\n", ab[0] + ab[1]);
+    }
+
+
+    private static void subtraction(Scanner scanner) {
+        System.out.println("Выбрана операция вычитание.");
+        float[] ab = scanner2Float(scanner);
+
+        System.out.printf("Результат: %.4f\n", ab[0] - ab[1]);
+    }
+
+
+    private static void multiplication(Scanner scanner) {
+        System.out.println("Выбрана операция умножение.");
+        float[] ab = scanner2Float(scanner);
+
+        System.out.printf("Результат: %.4f\n", ab[0] * ab[1]);
+    }
+
+
+    private static void division(Scanner scanner) {
+        System.out.println("Выбрана операция деление.");
+        float[] ab = scanner2Float(scanner);
+
+        if (ab[1] == 0.0) {
+            System.out.println("Деление на 0 невозможно");
+        } else {
+            System.out.printf("Результат: %.4f\n", ab[0] / ab[1]);
+        }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
